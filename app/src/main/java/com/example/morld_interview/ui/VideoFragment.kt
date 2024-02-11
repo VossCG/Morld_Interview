@@ -7,11 +7,9 @@ import com.example.morld_interview.base.BaseFragment
 import com.example.morld_interview.databinding.VideoViewBinding
 import com.example.morld_interview.media.VideoDataSource
 import com.google.android.exoplayer2.ExoPlayer
-import kotlin.math.log
 
 class VideoFragment(private val position: Int) :
     BaseFragment<VideoViewBinding>(VideoViewBinding::inflate) {
-    private val videoDataSource: VideoDataSource by lazy { VideoDataSource() }
     private val player: ExoPlayer by lazy { ExoPlayer.Builder(requireContext()).build() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,7 +22,7 @@ class VideoFragment(private val position: Int) :
     private fun setPlayer() {
         binding.videoView.player = player
         player.playWhenReady = true
-        player.setMediaSource(videoDataSource.getMediaRes())
+        player.setMediaSource(VideoDataSource.getMediaRes())
         player.prepare()
     }
 

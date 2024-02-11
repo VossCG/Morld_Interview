@@ -9,8 +9,6 @@ import java.io.IOException
 
 class MyMediaSourceEventListener(
     private val tag: String,
-    private val loadingCallback: () -> Unit,
-    private val errorCallback: (IOException) -> Unit,
 ) : MediaSourceEventListener {
 
     override fun onLoadCompleted(
@@ -31,7 +29,6 @@ class MyMediaSourceEventListener(
     ) {
         super.onLoadStarted(windowIndex, mediaPeriodId, loadEventInfo, mediaLoadData)
         Log.d(tag,"Load started")
-        loadingCallback.invoke()
     }
 
     override fun onLoadError(
@@ -51,7 +48,6 @@ class MyMediaSourceEventListener(
             wasCanceled
         )
         Log.d(tag, "Load Error")
-        errorCallback.invoke(error)
     }
 
     override fun onLoadCanceled(
