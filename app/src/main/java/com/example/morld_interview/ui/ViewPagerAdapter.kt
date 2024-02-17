@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morld_interview.databinding.VideoViewBinding
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 
-class ViewPagerAdapter(private val mediaSources: List<MediaSource>) :
+class ViewPagerAdapter(
+    private val mediaSources: List<MediaSource>,
+    private val players: List<ExoPlayer>,
+) :
     RecyclerView.Adapter<ViewPagerAdapter.VideoViewHolder>() {
 
     inner class VideoViewHolder(binding: VideoViewBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -26,7 +30,7 @@ class ViewPagerAdapter(private val mediaSources: List<MediaSource>) :
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         holder.index.text = position.toString()
-        holder.videoView.setPlayer(mediaSources[position])
+        holder.videoView.setPlayer(mediaSources[position], players[position])
     }
 
     override fun getItemCount(): Int {
